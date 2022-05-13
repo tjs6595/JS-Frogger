@@ -1,0 +1,38 @@
+.grid {
+    height: 600px;
+    width: 600px;
+    border: 1px solid black;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0;
+    margin: 0;
+}
+
+.grid div{
+    height: 60px;
+    width: 60px;
+}
+
+.ending-row{
+    background-color: forestgreen;
+}
+
+.starting-row{
+    background-color: saddlebrown;
+}
+
+.logLeft, .logRight {
+    background-color: royalblue;
+}
+
+.carLeft, .carRight{
+    background-color: darkgrey;
+}
+
+.row-1, .row-4, .row-8 {
+    background-color: lightgrey;
+}
+
+.frog {
+    background-color: green;
+}
