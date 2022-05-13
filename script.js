@@ -9,6 +9,8 @@ document.body.append(startButton);
 const gridSquareWidth = 10;
 const gridSquareHeight = 10;
 const squares = document.querySelectorAll('.grid div');
+const riverObjectsLeft = document.querySelectorAll('.riverLeft');
+const riverObjectsRight = document.querySelectorAll('.riverRight');
 
 //Set starting point for the frog.
 let currentIndex = 94;
@@ -48,8 +50,109 @@ function moveFrog(e){
 //Listen for an arrow key press, and then call the moveFrog function
 const keyPress = document.addEventListener('keydown', moveFrog)
 
-//Move Logs.
+//Start moving objects automatically.
+function autoMoveObjects(){
+    riverObjectsLeft.forEach(riverLeft => moveRiverLeft(riverLeft))
+    riverObjectsRight.forEach(riverRight => moveRiverRight(riverRight))
+}
 
-//Move Cars.
+
+
+//Move River Objects Left.
+function moveRiverLeft(riverLeft){
+    switch(true){
+        case riverLeft.classList.contains('river0'):
+            riverLeft.classList.remove('river0')
+            riverLeft.classList.add('river1')
+            break;
+        case riverLeft.classList.contains('river1'):
+            riverLeft.classList.remove('river1')
+            riverLeft.classList.add('river2')
+            break;
+        case riverLeft.classList.contains('river2'):
+            riverLeft.classList.remove('river2')
+            riverLeft.classList.add('river3')
+            break;
+        case riverLeft.classList.contains('river3'):
+            riverLeft.classList.remove('river3')
+            riverLeft.classList.add('river4')
+            break;
+        case riverLeft.classList.contains('river4'):
+            riverLeft.classList.remove('river4')
+            riverLeft.classList.add('river5')
+            break;
+        case riverLeft.classList.contains('river5'):
+            riverLeft.classList.remove('river5')
+            riverLeft.classList.add('river6')
+            break;
+        case riverLeft.classList.contains('river6'):
+            riverLeft.classList.remove('river6')
+            riverLeft.classList.add('river7')
+            break;
+        case riverLeft.classList.contains('river7'):
+            riverLeft.classList.remove('river7')
+            riverLeft.classList.add('river8')
+            break;
+        case riverLeft.classList.contains('river8'):
+            riverLeft.classList.remove('river8')
+            riverLeft.classList.add('river9')
+            break;
+        case riverLeft.classList.contains('river9'):
+            riverLeft.classList.remove('river9')
+            riverLeft.classList.add('river0')
+            break;
+    }
+}
+
+//Move River Objects Right.
+function moveRiverRight(riverRight){
+    switch (true){
+        case riverRight.classList.contains('river10'):
+            riverRight.classList.remove('river10')
+            riverRight.classList.add('river19')
+            break;
+        case riverRight.classList.contains('river11'):
+            riverRight.classList.remove('river11')
+            riverRight.classList.add('river10')
+            break;
+        case riverRight.classList.contains('river12'):
+            riverRight.classList.remove('river12')
+            riverRight.classList.add('river11')
+            break;
+        case riverRight.classList.contains('river13'):
+            riverRight.classList.remove('river13')
+            riverRight.classList.add('river12')
+            break;
+        case riverRight.classList.contains('river14'):
+            riverRight.classList.remove('river14')
+            riverRight.classList.add('river13')
+            break;
+        case riverRight.classList.contains('river15'):
+            riverRight.classList.remove('river15')
+            riverRight.classList.add('river14')
+            break;
+        case riverRight.classList.contains('river16'):
+            riverRight.classList.remove('river16')
+            riverRight.classList.add('river15')
+            break;
+        case riverRight.classList.contains('river17'):
+            riverRight.classList.remove('river17')
+            riverRight.classList.add('river16')
+            break;
+        case riverRight.classList.contains('river18'):
+            riverRight.classList.remove('river18')
+            riverRight.classList.add('river17')
+            break;
+        case riverRight.classList.contains('river19'):
+            riverRight.classList.remove('river19')
+            riverRight.classList.add('river18')
+            break;
+    }
+}
+
+//Move Road Objects.
 
 //Check Collisions.
+
+
+setInterval(autoMoveObjects, 1000);
