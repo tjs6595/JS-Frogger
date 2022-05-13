@@ -13,7 +13,7 @@
     width: 60px;
 }
 
-.ending-row{
+.forest{
     background-color: forestgreen;
 }
 
@@ -21,18 +21,42 @@
     background-color: saddlebrown;
 }
 
-.logLeft, .logRight {
+.riverLeft, .riverRight{
     background-color: royalblue;
 }
 
-.carLeft, .carRight{
+.log{
+    background-color: saddlebrown;
+}
+
+.turtle{
+    background-color: greenyellow;
+}
+
+.roadLeft, .roadRight{
     background-color: darkgrey;
 }
 
-.row-1, .row-4, .row-8 {
+.row-1, .row-4, .row-8{
     background-color: lightgrey;
 }
 
-.frog {
+.motorcycle{
+    background-color: blue;
+}
+
+.car{
+    background-color: red;
+}
+
+.bus{
+    background-color: yellow;
+}
+
+.semi {
+    background-color: black;
+}
+
+.frog{
     background-color: green;
 }
