@@ -358,10 +358,6 @@ startButton.addEventListener('click', () => {
     }
 })
 
-//moveTimerID = setInterval(autoMoveObjects, 1000)
-//Listen for an arrow key press, and then call the moveFrog function
-//const keyPress = document.addEventListener('keydown', moveFrog)
-
 function winOrLose(){
     collision();
     win();
