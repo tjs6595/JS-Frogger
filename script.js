@@ -47,7 +47,7 @@ function moveFrog(e){
             break;
     }
     squares[currentIndex].classList.add('frog')
-
+    console.log(currentIndex)
 }
 
 //Listen for an arrow key press, and then call the moveFrog function
@@ -297,12 +297,33 @@ function moveRoadLeft2(roadLeft2){
 
 //Check Collisions.
 function collision(){
-    if (squares[currentIndex].classList.contains('river0'||'river3'||'river4'||'river8'||'river9')||
-        squares[currentIndex].classList.contains('river12'||'river13'||'river14'||'river16'||'river18'||'river19')||
+    if (squares[currentIndex].classList.contains('river0')||
+        squares[currentIndex].classList.contains('river3')||
+        squares[currentIndex].classList.contains('river4')||
+        squares[currentIndex].classList.contains('river8')||
+        squares[currentIndex].classList.contains('river9')||
+        squares[currentIndex].classList.contains('river12')||
+        squares[currentIndex].classList.contains('river13')||
+        squares[currentIndex].classList.contains('river14')||
+        squares[currentIndex].classList.contains('river16')||
+        squares[currentIndex].classList.contains('river18')||
+        squares[currentIndex].classList.contains('river19')||
+        squares[currentIndex].classList.contains('road1')||
+        squares[currentIndex].classList.contains('road2')||
+        squares[currentIndex].classList.contains('road5')||
+        squares[currentIndex].classList.contains('road6')||
+        squares[currentIndex].classList.contains('road7')||
         squares[currentIndex].classList.contains('road11')||
-        squares[currentIndex].classList.contains('road1'||'road2'||'road15'||'road16'||'road18'||'road19'||'road27'||'road28')||
-        squares[currentIndex].classList.contains('road5'||'road6'||'road7')||
-        squares[currentIndex].classList.contains('road21'||'road22'||'road23'||'road24')){
+        squares[currentIndex].classList.contains('road15')||
+        squares[currentIndex].classList.contains('road16')||
+        squares[currentIndex].classList.contains('road18')||
+        squares[currentIndex].classList.contains('road19')||
+        squares[currentIndex].classList.contains('road21')||
+        squares[currentIndex].classList.contains('road22')||
+        squares[currentIndex].classList.contains('road23')||
+        squares[currentIndex].classList.contains('road24')||
+        squares[currentIndex].classList.contains('road27')||
+        squares[currentIndex].classList.contains('road28')){
         console.log('you lose');
         console.log(currentIndex);
         clearInterval(moveTimerID);
@@ -323,23 +344,23 @@ function win(){
     }
 }
 
-// startButton.addEventListener('click', () => {
-//     if(moveTimerID){
-//         moveTimerID = null;
-//         collistionCheckTimerID = null;
-//         clearInterval(moveTimerID);
-//         clearInterval(collistionCheckTimerID);
-//         document.removeEventListener('keydown', moveFrog);
-//     }else{
-//         moveTimerID = setInterval(autoMoveObjects, 1000)
-         collistionCheckTimerID = setInterval(winOrLose, 50)
-//         document.addEventListener('keydown', moveFrog)
-//     }
-// })
+startButton.addEventListener('click', () => {
+     if(moveTimerID){
+         moveTimerID = null;
+         collistionCheckTimerID = null;
+         clearInterval(moveTimerID);
+         clearInterval(collistionCheckTimerID);
+         document.removeEventListener('keydown', moveFrog);
+     }else{
+         moveTimerID = setInterval(autoMoveObjects, 1000)
+         collistionCheckTimerID = setInterval(winOrLose, 100)
+         document.addEventListener('keydown', moveFrog)
+    }
+})
 
-moveTimerID = setInterval(autoMoveObjects, 1000)
+//moveTimerID = setInterval(autoMoveObjects, 1000)
 //Listen for an arrow key press, and then call the moveFrog function
-const keyPress = document.addEventListener('keydown', moveFrog)
+//const keyPress = document.addEventListener('keydown', moveFrog)
 
 function winOrLose(){
     collision();
