@@ -7,13 +7,18 @@ const riverObjectsRight = document.querySelectorAll('.riverRight');
 const roadObjectsLeft1 = document.querySelectorAll('.roadLeft');
 const roadObjectsLeft2 = document.querySelectorAll('.roadLeft');
 const roadObjectsRight = document.querySelectorAll('.roadRight');
-let moveTimerID = null;
-let collistionCheckTimerID = null;
+let moveTimer;
+let collistionCheckTimer;
 
 //Create Start/Pause Button.
 const startButton = document.createElement('button');
 startButton.textContent = "START";
 document.body.append(startButton);
+
+//Create Reset Button.
+const resetButton = document.createElement('button');
+resetButton.textContent = "RESET";
+document.body.append(resetButton);
 
 //Set starting point for the frog.
 let currentIndex = 94;
@@ -47,7 +52,6 @@ function moveFrog(e){
             break;
     }
     squares[currentIndex].classList.add('frog')
-    console.log(currentIndex)
 }
 
 //Listen for an arrow key press, and then call the moveFrog function
@@ -325,10 +329,8 @@ function collision(){
         squares[currentIndex].classList.contains('road27')||
         squares[currentIndex].classList.contains('road28')){
         console.log('you lose');
-        console.log(currentIndex);
-        clearInterval(moveTimerID);
-        clearInterval(collistionCheckTimerID);
-        //squares[currentIndex].classList.remove('frog');
+        clearInterval(moveTimer);
+        clearInterval(collistionCheckTimer);
         document.removeEventListener('keydown', moveFrog);
     }
 }
@@ -337,25 +339,38 @@ function collision(){
 function win(){
     if (squares[currentIndex].classList.contains('forest')){
         console.log('you win!');
-        clearInterval(moveTimerID);
-        clearInterval(collistionCheckTimerID);
+        clearInterval(moveTimer);
+        clearInterval(collistionCheckTimer);
         //squares[currentIndex].classList.remove('frog');
         document.removeEventListener('keydown', moveFrog);
     }
 }
 
-startButton.addEventListener('click', () => {
-     if(moveTimerID){
-         moveTimerID = null;
-         collistionCheckTimerID = null;
-         clearInterval(moveTimerID);
-         clearInterval(collistionCheckTimerID);
-         document.removeEventListener('keydown', moveFrog);
+startButton.addEventListener('click', function(){
+     if(moveTimer){
+        clearInterval(moveTimer);
+        clearInterval(collistionCheckTimer);
+        moveTimer = null;
+        collistionCheckTimer = null;
+        document.removeEventListener('keydown', moveFrog);
+        startButton.textContent = "RESUME"
      }else{
-         moveTimerID = setInterval(autoMoveObjects, 1000)
-         collistionCheckTimerID = setInterval(winOrLose, 100)
-         document.addEventListener('keydown', moveFrog)
+        moveTimer = setInterval(autoMoveObjects, 1000)
+        collistionCheckTimer = setInterval(winOrLose, 100)
+        document.addEventListener('keydown', moveFrog)
+        startButton.textContent = "PAUSE"
     }
+})
+
+resetButton.addEventListener('click', function(){
+    squares[currentIndex].classList.remove('frog')
+    clearInterval(moveTimer);
+    clearInterval(collistionCheckTimer);
+    moveTimer = null;
+    collistionCheckTimer = null;
+    currentIndex = 94;
+    squares[currentIndex].classList.add('frog')
+    startButton.textContent = "START"
 })
 
 function winOrLose(){
