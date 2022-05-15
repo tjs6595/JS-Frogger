@@ -37,24 +37,24 @@
     background-color: darkgrey;
 }
 
-.row-1, .row-4, .row-8{
-    background-color: lightgrey;
-}
-
-.motorcycle{
+.road11{
     background-color: blue;
 }
 
-.car{
+.road1, .road2, .road15, .road16, .road18, .road19, .road27, .road28{
     background-color: red;
 }
 
-.bus{
+.road5, .road6, .road7{
     background-color: yellow;
 }
 
-.semi {
+.road21, .road22, .road23, .road24{
     background-color: black;
+}
+
+.row-1, .row-4, .row-8{
+    background-color: lightgrey;
 }
 
 .frog{

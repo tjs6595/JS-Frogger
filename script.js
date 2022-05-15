@@ -11,6 +11,9 @@ const gridSquareHeight = 10;
 const squares = document.querySelectorAll('.grid div');
 const riverObjectsLeft = document.querySelectorAll('.riverLeft');
 const riverObjectsRight = document.querySelectorAll('.riverRight');
+const roadObjectsLeft1 = document.querySelectorAll('.roadLeft');
+const roadObjectsLeft2 = document.querySelectorAll('.roadLeft');
+const roadObjectsRight = document.querySelectorAll('.roadRight');
 
 //Set starting point for the frog.
 let currentIndex = 94;
@@ -54,6 +57,9 @@ const keyPress = document.addEventListener('keydown', moveFrog)
 function autoMoveObjects(){
     riverObjectsLeft.forEach(riverLeft => moveRiverLeft(riverLeft))
     riverObjectsRight.forEach(riverRight => moveRiverRight(riverRight))
+    roadObjectsLeft1.forEach(roadLeft1 => moveRoadLeft1(roadLeft1))
+    roadObjectsLeft2.forEach(roadLeft2 => moveRoadLeft2(roadLeft2))
+    roadObjectsRight.forEach(roadRight => moveRoadRight(roadRight))
 }
 
 
@@ -151,6 +157,143 @@ function moveRiverRight(riverRight){
 }
 
 //Move Road Objects.
+//Move first row of road objects left.
+function moveRoadLeft1(roadLeft1){
+    switch(true){
+        case roadLeft1.classList.contains('road0'):
+            roadLeft1.classList.remove('road0')
+            roadLeft1.classList.add('road1')
+            break;
+        case roadLeft1.classList.contains('road1'):
+            roadLeft1.classList.remove('road1')
+            roadLeft1.classList.add('road2')
+            break;
+        case roadLeft1.classList.contains('road2'):
+            roadLeft1.classList.remove('road2')
+            roadLeft1.classList.add('road3')
+            break;
+        case roadLeft1.classList.contains('road3'):
+            roadLeft1.classList.remove('road3')
+            roadLeft1.classList.add('road4')
+            break;
+        case roadLeft1.classList.contains('road4'):
+            roadLeft1.classList.remove('road4')
+            roadLeft1.classList.add('road5')
+            break;
+        case roadLeft1.classList.contains('road5'):
+            roadLeft1.classList.remove('road5')
+            roadLeft1.classList.add('road6')
+            break;
+        case roadLeft1.classList.contains('road6'):
+            roadLeft1.classList.remove('road6')
+            roadLeft1.classList.add('road7')
+            break;
+        case roadLeft1.classList.contains('road7'):
+            roadLeft1.classList.remove('road7')
+            roadLeft1.classList.add('road8')
+            break;
+        case roadLeft1.classList.contains('road8'):
+            roadLeft1.classList.remove('road8')
+            roadLeft1.classList.add('road9')
+            break;
+        case roadLeft1.classList.contains('road9'):
+            roadLeft1.classList.remove('road9')
+            roadLeft1.classList.add('road0')
+            break;
+    }
+}
+
+//Move second row of road objects right.
+function moveRoadRight(roadRight){
+    switch (true){
+        case roadRight.classList.contains('road10'):
+            roadRight.classList.remove('road10')
+            roadRight.classList.add('road19')
+            break;
+        case roadRight.classList.contains('road11'):
+            roadRight.classList.remove('road11')
+            roadRight.classList.add('road10')
+            break;
+        case roadRight.classList.contains('road12'):
+            roadRight.classList.remove('road12')
+            roadRight.classList.add('road11')
+            break;
+        case roadRight.classList.contains('road13'):
+            roadRight.classList.remove('road13')
+            roadRight.classList.add('road12')
+            break;
+        case roadRight.classList.contains('road14'):
+            roadRight.classList.remove('road14')
+            roadRight.classList.add('road13')
+            break;
+        case roadRight.classList.contains('road15'):
+            roadRight.classList.remove('road15')
+            roadRight.classList.add('road14')
+            break;
+        case roadRight.classList.contains('road16'):
+            roadRight.classList.remove('road16')
+            roadRight.classList.add('road15')
+            break;
+        case roadRight.classList.contains('road17'):
+            roadRight.classList.remove('road17')
+            roadRight.classList.add('road16')
+            break;
+        case roadRight.classList.contains('road18'):
+            roadRight.classList.remove('road18')
+            roadRight.classList.add('road17')
+            break;
+        case roadRight.classList.contains('road19'):
+            roadRight.classList.remove('road19')
+            roadRight.classList.add('road18')
+            break;
+    }
+}
+
+//Move third row of road objects left.
+function moveRoadLeft2(roadLeft2){
+    switch(true){
+        case roadLeft2.classList.contains('road20'):
+            roadLeft2.classList.remove('road20')
+            roadLeft2.classList.add('road21')
+            break;
+        case roadLeft2.classList.contains('road21'):
+            roadLeft2.classList.remove('road21')
+            roadLeft2.classList.add('road22')
+            break;
+        case roadLeft2.classList.contains('road22'):
+            roadLeft2.classList.remove('road22')
+            roadLeft2.classList.add('road23')
+            break;
+        case roadLeft2.classList.contains('road23'):
+            roadLeft2.classList.remove('road23')
+            roadLeft2.classList.add('road24')
+            break;
+        case roadLeft2.classList.contains('road24'):
+            roadLeft2.classList.remove('road24')
+            roadLeft2.classList.add('road25')
+            break;
+        case roadLeft2.classList.contains('road25'):
+            roadLeft2.classList.remove('road25')
+            roadLeft2.classList.add('road26')
+            break;
+        case roadLeft2.classList.contains('road26'):
+            roadLeft2.classList.remove('road26')
+            roadLeft2.classList.add('road27')
+            break;
+        case roadLeft2.classList.contains('road27'):
+            roadLeft2.classList.remove('road27')
+            roadLeft2.classList.add('road28')
+            break;
+        case roadLeft2.classList.contains('road28'):
+            roadLeft2.classList.remove('road28')
+            roadLeft2.classList.add('road29')
+            break;
+        case roadLeft2.classList.contains('road29'):
+            roadLeft2.classList.remove('road29')
+            roadLeft2.classList.add('road20')
+            break;
+    }
+}
 
 //Check Collisions.
 
