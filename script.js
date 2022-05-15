@@ -1,11 +1,4 @@
-
-
-
-
-const startButton = document.createElement('button');
-startButton.textContent = "START";
-document.body.append(startButton);
-
+//Define Constants.
 const gridSquareWidth = 10;
 const gridSquareHeight = 10;
 const squares = document.querySelectorAll('.grid div');
@@ -14,6 +7,13 @@ const riverObjectsRight = document.querySelectorAll('.riverRight');
 const roadObjectsLeft1 = document.querySelectorAll('.roadLeft');
 const roadObjectsLeft2 = document.querySelectorAll('.roadLeft');
 const roadObjectsRight = document.querySelectorAll('.roadRight');
+let moveTimerID = null;
+let collistionCheckTimerID = null;
+
+//Create Start/Pause Button.
+const startButton = document.createElement('button');
+startButton.textContent = "START";
+document.body.append(startButton);
 
 //Set starting point for the frog.
 let currentIndex = 94;
@@ -51,7 +51,7 @@ function moveFrog(e){
 }
 
 //Listen for an arrow key press, and then call the moveFrog function
-const keyPress = document.addEventListener('keydown', moveFrog)
+//const keyPress = document.addEventListener('keydown', moveFrog)
 
 //Start moving objects automatically.
 function autoMoveObjects(){
@@ -296,6 +296,52 @@ function moveRoadLeft2(roadLeft2){
 }
 
 //Check Collisions.
+function collision(){
+    if (squares[currentIndex].classList.contains('river0'||'river3'||'river4'||'river8'||'river9')||
+        squares[currentIndex].classList.contains('river12'||'river13'||'river14'||'river16'||'river18'||'river19')||
+        squares[currentIndex].classList.contains('road11')||
+        squares[currentIndex].classList.contains('road1'||'road2'||'road15'||'road16'||'road18'||'road19'||'road27'||'road28')||
+        squares[currentIndex].classList.contains('road5'||'road6'||'road7')||
+        squares[currentIndex].classList.contains('road21'||'road22'||'road23'||'road24')){
+        console.log('you lose');
+        console.log(currentIndex);
+        clearInterval(moveTimerID);
+        clearInterval(collistionCheckTimerID);
+        //squares[currentIndex].classList.remove('frog');
+        document.removeEventListener('keydown', moveFrog);
+    }
+}
 
+//Check for a win.
+function win(){
+    if (squares[currentIndex].classList.contains('forest')){
+        console.log('you win!');
+        clearInterval(moveTimerID);
+        clearInterval(collistionCheckTimerID);
+        //squares[currentIndex].classList.remove('frog');
+        document.removeEventListener('keydown', moveFrog);
+    }
+}
 
-setInterval(autoMoveObjects, 1000);
+// startButton.addEventListener('click', () => {
+//     if(moveTimerID){
+//         moveTimerID = null;
+//         collistionCheckTimerID = null;
+//         clearInterval(moveTimerID);
+//         clearInterval(collistionCheckTimerID);
+//         document.removeEventListener('keydown', moveFrog);
+//     }else{
+//         moveTimerID = setInterval(autoMoveObjects, 1000)
+         collistionCheckTimerID = setInterval(winOrLose, 50)
+//         document.addEventListener('keydown', moveFrog)
+//     }
+// })
+
+moveTimerID = setInterval(autoMoveObjects, 1000)
+//Listen for an arrow key press, and then call the moveFrog function
+const keyPress = document.addEventListener('keydown', moveFrog)
+
+function winOrLose(){
+    collision();
+    win();
+}
