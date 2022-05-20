@@ -7,18 +7,26 @@ const riverObjectsRight = document.querySelectorAll('.riverRight');
 const roadObjectsLeft1 = document.querySelectorAll('.roadLeft');
 const roadObjectsLeft2 = document.querySelectorAll('.roadLeft');
 const roadObjectsRight = document.querySelectorAll('.roadRight');
+const gameStatusDisplay = document.querySelector('#game-result')
+const gameScoreDisplay = document.querySelector('#player-score')
 let moveTimer;
 let collistionCheckTimer;
+let playerScore = 0;
 
 //Create Start/Pause Button.
 const startButton = document.createElement('button');
 startButton.textContent = "START";
-document.body.append(startButton);
+document.getElementById('button-container').append(startButton);
 
-//Create Reset Button.
-const resetButton = document.createElement('button');
-resetButton.textContent = "RESET";
-document.body.append(resetButton);
+//Create Reset Level Button.
+const resetLevelButton = document.createElement('button');
+resetLevelButton.textContent = "RESTART LEVEL";
+document.getElementById('button-container').append(resetLevelButton);
+
+//Create Reset Game Button.
+const resetGameButton = document.createElement('button');
+resetGameButton.textContent = "NEW GAME";
+document.getElementById('button-container').append(resetGameButton);
 
 //Set starting point for the frog.
 let currentIndex = 94;
@@ -328,41 +336,61 @@ function collision(){
         squares[currentIndex].classList.contains('road24')||
         squares[currentIndex].classList.contains('road27')||
         squares[currentIndex].classList.contains('road28')){
-        console.log('you lose');
         clearInterval(moveTimer);
         clearInterval(collistionCheckTimer);
         document.removeEventListener('keydown', moveFrog);
+        gameStatusDisplay.textContent = 'Sorry, you lost.';
+        resetLevelButton.textContent = 'PLAY AGAIN'
     }
 }
 
 //Check for a win.
 function win(){
     if (squares[currentIndex].classList.contains('forest')){
-        console.log('you win!');
         clearInterval(moveTimer);
         clearInterval(collistionCheckTimer);
-        //squares[currentIndex].classList.remove('frog');
         document.removeEventListener('keydown', moveFrog);
+        playerScore = playerScore + 100;
+        gameScoreDisplay.textContent = playerScore;
+        gameStatusDisplay.textContent = 'Congratulations You Win!!!';
+        resetLevelButton.textContent = 'PLAY AGAIN'
+        startButton.setAttribute('disabled', '');
     }
 }
 
 startButton.addEventListener('click', function(){
-     if(moveTimer){
+     if(moveTimer && (squares[currentIndex].classList.contains('forest') === false)){
         clearInterval(moveTimer);
         clearInterval(collistionCheckTimer);
         moveTimer = null;
         collistionCheckTimer = null;
         document.removeEventListener('keydown', moveFrog);
         startButton.textContent = "RESUME"
+        gameStatusDisplay.textContent = 'Game Paused';
      }else{
         moveTimer = setInterval(autoMoveObjects, 1000)
         collistionCheckTimer = setInterval(winOrLose, 100)
         document.addEventListener('keydown', moveFrog)
         startButton.textContent = "PAUSE"
+        gameStatusDisplay.textContent = '';
     }
 })
 
-resetButton.addEventListener('click', function(){
+resetLevelButton.addEventListener('click', function(){
+    squares[currentIndex].classList.remove('frog')
+    clearInterval(moveTimer);
+    clearInterval(collistionCheckTimer);
+    moveTimer = null;
+    collistionCheckTimer = null;
+    currentIndex = 94;
+    squares[currentIndex].classList.add('frog');
+    startButton.textContent = "START";
+    gameStatusDisplay.textContent = 'Start Game';
+    resetLevelButton.textContent = 'RESTART LEVEL';
+    startButton.removeAttribute('disabled');
+})
+
+resetGameButton.addEventListener('click', function(){
     squares[currentIndex].classList.remove('frog')
     clearInterval(moveTimer);
     clearInterval(collistionCheckTimer);
@@ -371,6 +399,11 @@ resetButton.addEventListener('click', function(){
     currentIndex = 94;
     squares[currentIndex].classList.add('frog')
     startButton.textContent = "START"
+    gameStatusDisplay.textContent = 'Start Game';
+    playerScore = 0;
+    gameScoreDisplay.textContent = playerScore;
+    resetLevelButton.textContent = 'RESTART LEVEL'
+    startButton.removeAttribute('disabled');
 })
 
 function winOrLose(){
