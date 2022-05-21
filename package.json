@@ -4,7 +4,9 @@
   "description": "This is a browser game based off of the famous Atari Game Frogger.",
   "main": "script.js",
   "scripts": {
+    "start": "node script.js",
     "test": "echo \"Error: no test specified\" && exit 1"
+    
   },
   "repository": {
     "type": "git",
