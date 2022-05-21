@@ -1,14 +1,14 @@
 //Define Constants.
 const gridSquareWidth = 10;
 const gridSquareHeight = 10;
-const squares = document.querySelectorAll('.grid div');
-const riverObjectsLeft = document.querySelectorAll('.riverLeft');
-const riverObjectsRight = document.querySelectorAll('.riverRight');
-const roadObjectsLeft1 = document.querySelectorAll('.roadLeft');
-const roadObjectsLeft2 = document.querySelectorAll('.roadLeft');
-const roadObjectsRight = document.querySelectorAll('.roadRight');
-const gameStatusDisplay = document.querySelector('#game-result')
-const gameScoreDisplay = document.querySelector('#player-score')
+const squares = window.document.querySelectorAll('.grid div');
+const riverObjectsLeft = window.document.querySelectorAll('.riverLeft');
+const riverObjectsRight = window.document.querySelectorAll('.riverRight');
+const roadObjectsLeft1 = window.document.querySelectorAll('.roadLeft');
+const roadObjectsLeft2 = window.document.querySelectorAll('.roadLeft');
+const roadObjectsRight = window.document.querySelectorAll('.roadRight');
+const gameStatusDisplay = window.document.querySelector('#game-result')
+const gameScoreDisplay = window.document.querySelector('#player-score')
 let moveTimer;
 let collistionCheckTimer;
 let playerScore = 0;
