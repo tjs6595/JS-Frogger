@@ -1,17 +1,18 @@
 //Define Constants.
 const gridSquareWidth = 10;
 const gridSquareHeight = 10;
-const squares = window.document.querySelectorAll('.grid div');
-const riverObjectsLeft = window.document.querySelectorAll('.riverLeft');
-const riverObjectsRight = window.document.querySelectorAll('.riverRight');
-const roadObjectsLeft1 = window.document.querySelectorAll('.roadLeft');
-const roadObjectsLeft2 = window.document.querySelectorAll('.roadLeft');
-const roadObjectsRight = window.document.querySelectorAll('.roadRight');
-const gameStatusDisplay = window.document.querySelector('#game-result')
-const gameScoreDisplay = window.document.querySelector('#player-score')
+const squares = document.querySelectorAll('.grid div');
+const riverObjectsLeft = document.querySelectorAll('.riverLeft');
+const riverObjectsRight = document.querySelectorAll('.riverRight');
+const roadObjectsLeft1 = document.querySelectorAll('.roadLeft');
+const roadObjectsLeft2 = document.querySelectorAll('.roadLeft');
+const roadObjectsRight = document.querySelectorAll('.roadRight');
+const gameStatusDisplay = document.querySelector('#game-result')
+const gameScoreDisplay = document.querySelector('#player-score')
 let moveTimer;
 let collistionCheckTimer;
 let playerScore = 0;
+
 
 //Create Start/Pause Button.
 const startButton = document.createElement('button');
@@ -31,35 +32,76 @@ document.getElementById('button-container').append(resetGameButton);
 //Set starting point for the frog.
 let currentIndex = 94;
 
+//FROG ANIMATION.
+const frogSquare = document.getElementsByClassName('frog')
+const frogImage = document.createElement('img')
+frogImage.src = '/C:/Users/mmhei/Desktop/KST-EC/JS-Frogger/JS-Frogger/frogUp.png';
+squares[currentIndex].style.backgroundImage = `url(${frogImage.src})`;
+let frogWidth = 100;
+let frogHeight = 100;
+squares[currentIndex].style.backgroundPosition = '${frogWidth}px ${frogHeight}px';
+
+// squares[currentIndex].style.backgroundPosition = '${frogWidth}px ${frogHeight}px';
+
+const drawFrog = (frameX, frameY) => {
+    const x = frameX * frogWidth;
+    const y = frameY * frogHeight;
+    frogImage.style.backgroundPosition = `${x}px ${y}px`;
+}
+
+drawFrog(frogWidth, frogHeight)
+
 //Move the Frog based on arrow key press after checking boundaries.
 function moveFrog(e){
     switch (e.key){
         case 'ArrowLeft':
             if(currentIndex % gridSquareWidth !== 0){
                 squares[currentIndex].classList.remove('frog')
+                squares[currentIndex].style.backgroundImage = ``;
                 currentIndex = currentIndex -= 1;
+                frogImage.src = '/C:/Users/mmhei/Desktop/KST-EC/JS-Frogger/JS-Frogger/frogLeft.png';
+                frogWidth = 10;
+                frogHeight = 10;
+                drawFrog(frogWidth, frogHeight);
             }
             break;
         case 'ArrowRight':
             if(currentIndex % gridSquareWidth !== 9){
                 squares[currentIndex].classList.remove('frog')
+                squares[currentIndex].style.backgroundImage = ``
                 currentIndex = currentIndex += 1;
+                frogImage.src = '/C:/Users/mmhei/Desktop/KST-EC/JS-Frogger/JS-Frogger/frogRight.png';
+                frogImage.style.height = '57px';
+                frogImage.style.width = '57px';
             }
             break;
         case 'ArrowUp':
             if((currentIndex - gridSquareWidth) >= 0){
                 squares[currentIndex].classList.remove('frog')
+                squares[currentIndex].style.backgroundImage = ``
                 currentIndex = currentIndex -= gridSquareWidth;
+                frogImage.src = '/C:/Users/mmhei/Desktop/KST-EC/JS-Frogger/JS-Frogger/frogUp.png';
+                frogImage.style.height = '57px';
+                frogImage.style.width = '57px';
             }
             break;
         case 'ArrowDown':
             if((currentIndex + gridSquareWidth) <= (squares.length-1)){
                 squares[currentIndex].classList.remove('frog')
+                squares[currentIndex].style.backgroundImage = ``
                 currentIndex = currentIndex += gridSquareWidth;
+                frogImage.src = '/C:/Users/mmhei/Desktop/KST-EC/JS-Frogger/JS-Frogger/frogDown.png';
+                frogImage.style.height = '57px';
+                frogImage.style.width = '57px';
             }
             break;
     }
     squares[currentIndex].classList.add('frog')
+    if (squares[currentIndex].classList.contains('frog')){
+        frogImage.style.height = '57px';
+        frogImage.style.width = '57px';
+        squares[currentIndex].style.backgroundImage = `url(${frogImage.src})`;
+    }
 }
 
 //Listen for an arrow key press, and then call the moveFrog function
@@ -73,8 +115,6 @@ function autoMoveObjects(){
     roadObjectsLeft2.forEach(roadLeft2 => moveRoadLeft2(roadLeft2))
     roadObjectsRight.forEach(roadRight => moveRoadRight(roadRight))
 }
-
-
 
 //Move River Objects Left.
 function moveRiverLeft(riverLeft){
@@ -378,12 +418,15 @@ startButton.addEventListener('click', function(){
 
 resetLevelButton.addEventListener('click', function(){
     squares[currentIndex].classList.remove('frog')
+    squares[currentIndex].style.backgroundImage = ``;
     clearInterval(moveTimer);
     clearInterval(collistionCheckTimer);
     moveTimer = null;
     collistionCheckTimer = null;
     currentIndex = 94;
     squares[currentIndex].classList.add('frog');
+    frogImage.src = '/C:/Users/mmhei/Desktop/KST-EC/JS-Frogger/JS-Frogger/frogUp.png';
+    squares[currentIndex].style.backgroundImage = `url(${frogImage.src})`;
     startButton.textContent = "START";
     gameStatusDisplay.textContent = 'Start Game';
     resetLevelButton.textContent = 'RESTART LEVEL';
@@ -392,12 +435,15 @@ resetLevelButton.addEventListener('click', function(){
 
 resetGameButton.addEventListener('click', function(){
     squares[currentIndex].classList.remove('frog')
+    squares[currentIndex].style.backgroundImage = ``;
     clearInterval(moveTimer);
     clearInterval(collistionCheckTimer);
     moveTimer = null;
     collistionCheckTimer = null;
     currentIndex = 94;
     squares[currentIndex].classList.add('frog')
+    frogImage.src = '/C:/Users/mmhei/Desktop/KST-EC/JS-Frogger/JS-Frogger/frogUp.png';
+    squares[currentIndex].style.backgroundImage = `url(${frogImage.src})`;
     startButton.textContent = "START"
     gameStatusDisplay.textContent = 'Start Game';
     playerScore = 0;

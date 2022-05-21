@@ -1,6 +1,6 @@
 .grid {
-    height: 600px;
-    width: 600px;
+    height: 500px;
+    width: 500px;
     border: 2px solid black;
     display: flex;
     flex-wrap: wrap;
@@ -9,14 +9,14 @@
 }
 
 .grid div{
-    height: 60px;
-    width: 60px;
+    height: 50px;
+    width: 50px;
 }
 
 #button-container{
     display: flex;
     justify-content: space-between;
-    width: 600px;
+    width: 500px;
 }
 
 button{
@@ -74,13 +74,11 @@ button{
     background-color: lightgrey;
 }
 
-.frog{
+/* .frog{
     background-color: yellowgreen;
-}
+} */
 
-#sprite-image {
-    height: 325px;
-    width: 184px;
-    background: url("...link to the above image...")
-      0px 0px;
-  }
+/* #frogimage {
+    height: 80px;
+    width: 600px;
+  } */
