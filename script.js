@@ -37,18 +37,17 @@ const frogSquare = document.getElementsByClassName('frog')
 const frogImage = document.createElement('img')
 frogImage.src = '/C:/Users/mmhei/Desktop/KST-EC/JS-Frogger/JS-Frogger/frogUp.png';
 squares[currentIndex].style.backgroundImage = `url(${frogImage.src})`;
-let frogWidth = 100;
-let frogHeight = 100;
+let frogWidth = 0;
+let frogHeight = -2;
+let frameX = 1;
+let frameY = 1;
 squares[currentIndex].style.backgroundPosition = '${frogWidth}px ${frogHeight}px';
-
-// squares[currentIndex].style.backgroundPosition = '${frogWidth}px ${frogHeight}px';
 
 const drawFrog = (frameX, frameY) => {
     const x = frameX * frogWidth;
     const y = frameY * frogHeight;
-    frogImage.style.backgroundPosition = `${x}px ${y}px`;
+    squares[currentIndex].style.backgroundPosition = `${x}px ${y}px`;
 }
-
 drawFrog(frogWidth, frogHeight)
 
 //Move the Frog based on arrow key press after checking boundaries.
@@ -60,8 +59,8 @@ function moveFrog(e){
                 squares[currentIndex].style.backgroundImage = ``;
                 currentIndex = currentIndex -= 1;
                 frogImage.src = '/C:/Users/mmhei/Desktop/KST-EC/JS-Frogger/JS-Frogger/frogLeft.png';
-                frogWidth = 10;
-                frogHeight = 10;
+                frogWidth = 0;
+                frogHeight = -1;
                 drawFrog(frogWidth, frogHeight);
             }
             break;
@@ -71,8 +70,8 @@ function moveFrog(e){
                 squares[currentIndex].style.backgroundImage = ``
                 currentIndex = currentIndex += 1;
                 frogImage.src = '/C:/Users/mmhei/Desktop/KST-EC/JS-Frogger/JS-Frogger/frogRight.png';
-                frogImage.style.height = '57px';
-                frogImage.style.width = '57px';
+                frogWidth = 0;
+                frogHeight = -1;
             }
             break;
         case 'ArrowUp':
@@ -81,8 +80,8 @@ function moveFrog(e){
                 squares[currentIndex].style.backgroundImage = ``
                 currentIndex = currentIndex -= gridSquareWidth;
                 frogImage.src = '/C:/Users/mmhei/Desktop/KST-EC/JS-Frogger/JS-Frogger/frogUp.png';
-                frogImage.style.height = '57px';
-                frogImage.style.width = '57px';
+                frogWidth = 0;
+                frogHeight = -1;
             }
             break;
         case 'ArrowDown':
@@ -91,8 +90,8 @@ function moveFrog(e){
                 squares[currentIndex].style.backgroundImage = ``
                 currentIndex = currentIndex += gridSquareWidth;
                 frogImage.src = '/C:/Users/mmhei/Desktop/KST-EC/JS-Frogger/JS-Frogger/frogDown.png';
-                frogImage.style.height = '57px';
-                frogImage.style.width = '57px';
+                frogWidth = 0;
+                frogHeight = -2;
             }
             break;
     }
@@ -103,9 +102,6 @@ function moveFrog(e){
         squares[currentIndex].style.backgroundImage = `url(${frogImage.src})`;
     }
 }
-
-//Listen for an arrow key press, and then call the moveFrog function
-//const keyPress = document.addEventListener('keydown', moveFrog)
 
 //Start moving objects automatically.
 function autoMoveObjects(){
@@ -398,6 +394,7 @@ function win(){
     }
 }
 
+//Start button function.
 startButton.addEventListener('click', function(){
      if(moveTimer && (squares[currentIndex].classList.contains('forest') === false)){
         clearInterval(moveTimer);
@@ -416,6 +413,7 @@ startButton.addEventListener('click', function(){
     }
 })
 
+//Reset level button function.
 resetLevelButton.addEventListener('click', function(){
     squares[currentIndex].classList.remove('frog')
     squares[currentIndex].style.backgroundImage = ``;
@@ -433,6 +431,7 @@ resetLevelButton.addEventListener('click', function(){
     startButton.removeAttribute('disabled');
 })
 
+//Reset game button function.
 resetGameButton.addEventListener('click', function(){
     squares[currentIndex].classList.remove('frog')
     squares[currentIndex].style.backgroundImage = ``;
@@ -452,6 +451,7 @@ resetGameButton.addEventListener('click', function(){
     startButton.removeAttribute('disabled');
 })
 
+//Function that calls the functions to detect a win or a lose.
 function winOrLose(){
     collision();
     win();

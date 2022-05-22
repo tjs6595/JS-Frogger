@@ -32,10 +32,12 @@ button{
 
 .forest{
     background-color: forestgreen;
+    background-image: url('/C:/Users/mmhei/Desktop/KST-EC/JS-Frogger/JS-Frogger/forest.png');
 }
 
 .starting-row{
-    background-color: saddlebrown;
+    background-color: lightgreen;
+    background-image: url('/C:/Users/mmhei/Desktop/KST-EC/JS-Frogger/JS-Frogger/startingRow.png');
 }
 
 .riverLeft, .riverRight{
@@ -73,12 +75,3 @@ button{
 .row-1, .row-4, .row-8{
     background-color: lightgrey;
 }
-
-/* .frog{
-    background-color: yellowgreen;
-} */
-
-/* #frogimage {
-    height: 80px;
-    width: 600px;
-  } */
